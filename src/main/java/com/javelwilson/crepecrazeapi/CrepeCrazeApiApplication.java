@@ -14,6 +14,11 @@ public class CrepeCrazeApiApplication {
         return "Crepe Craze API";
     }
 
+    @GetMapping("/about")
+    public String about() {
+        return "Created by Javel Wilson";
+    }
+
     public static void main(String[] args) {
         SpringApplication.run(CrepeCrazeApiApplication.class, args);
     }
