@@ -12,3 +12,15 @@ script:
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
+
+deploy:
+  provider: elasticbeanstalk
+  region: us-east-2
+  app: crepe-craze-api
+  env: CrepeCrazeApi-env
+  bucket_name: elasticbeanstalk-us-east-2-127596255715
+  bucket_path: crepe-craze-api
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
