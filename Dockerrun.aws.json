@@ -1,18 +1,12 @@
 {
-  "AWSEBDockerrunVersion": 2,
-  "containerDefinitions": [
+  "AWSEBDockerrunVersion": "1",
+  "Image": {
+    "Name": "javelwilson/crepe-craze-api"
+  },
+  "Ports": [
     {
-      "name": "crepe-craze-api",
-      "image": "javelwilson/crepe-craze-api",
-      "hostname": "crepe-craze-api",
-      "essential": true,
-      "portMappings": [
-        {
-          "hostPort": 8080,
-          "containerPort": 8080
-        }
-      ],
-      "memory": 128
+      "ContainerPort": 8080,
+      "HostPort": 8000
     }
   ]
 }
