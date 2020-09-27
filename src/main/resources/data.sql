@@ -1,3 +1,5 @@
+delete from User;
+delete from User_Crepe_Orders;
 delete from Crepe_Order_Crepes;
 delete from Crepe_Ingredients;
 delete from Crepe;

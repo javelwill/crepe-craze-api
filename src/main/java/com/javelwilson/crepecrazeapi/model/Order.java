@@ -14,7 +14,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "Taco_Order")
+@Table(name = "Crepe_Order")
 public class Order implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -23,7 +23,7 @@ public class Order implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private Date placeAt;
+    private Date placedAt;
 
     @NotBlank(message = "Name is required")
     private String name;
@@ -49,6 +49,9 @@ public class Order implements Serializable {
     @Digits(integer=3, fraction=0, message="Invalid CVV")
     private String ccCVV;
 
+    @ManyToOne
+    private User user;
+
     @ManyToMany(targetEntity = Crepe.class)
     private List<Crepe> crepes = new ArrayList<>();
 
@@ -56,6 +59,6 @@ public class Order implements Serializable {
     }
     @PrePersist
     public void placedAt() {
-        this.placeAt = new Date();
+        this.placedAt = new Date();
     }
 }
