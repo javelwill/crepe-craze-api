@@ -23,14 +23,14 @@ create table if not exists Crepe (
   name varchar(50) not null,
   created_at timestamp not null
 );
-create table if not exists Crepe_Ingredients (
-  crepe bigint not null,
-  ingredient varchar(4) not null
+create table if not exists Crepe_Ingredient (
+  crepe_id bigint not null,
+  ingredient_id varchar(4) not null
 );
-alter table Crepe_Ingredients
-    add foreign key (crepe) references Crepe(id);
-alter table Crepe_Ingredients
-    add foreign key (ingredient) references Ingredient(id);
+alter table Crepe_Ingredient
+    add foreign key (crepe_id) references Crepe(id);
+alter table Crepe_Ingredient
+    add foreign key (ingredient_id) references Ingredient(id);
 
 create table if not exists Crepe_Order (
     id identity,

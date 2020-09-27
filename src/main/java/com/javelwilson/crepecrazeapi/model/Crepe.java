@@ -14,7 +14,7 @@ import java.util.List;
 public class Crepe {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Date createdAt;
@@ -24,8 +24,9 @@ public class Crepe {
     private String name;
 
     @ManyToMany(targetEntity = Ingredient.class)
+    @JoinTable(name = "Crepe_Ingredient", joinColumns = @JoinColumn(name = "crepe_id"), inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
     @Size(min = 1, message = "At least one ingredient must be chosen")
-    private List<String> ingredients;
+    private List<Ingredient> ingredients;
 
     @PrePersist
     void createdAt() {

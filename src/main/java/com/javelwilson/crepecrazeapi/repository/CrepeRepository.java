@@ -2,6 +2,7 @@ package com.javelwilson.crepecrazeapi.repository;
 
 import com.javelwilson.crepecrazeapi.model.Crepe;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface CrepeRepository extends CrudRepository<Crepe, Long> {
+public interface CrepeRepository extends PagingAndSortingRepository<Crepe, Long> {
 }
