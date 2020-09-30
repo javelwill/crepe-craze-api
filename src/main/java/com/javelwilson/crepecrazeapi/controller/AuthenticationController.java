@@ -1,7 +1,7 @@
 package com.javelwilson.crepecrazeapi.controller;
 
 
-import com.javelwilson.crepecrazeapi.model.LoginForm;
+import com.javelwilson.crepecrazeapi.model.AuthenticationRequest;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthenticationController {
 
     @PostMapping("/test")
-    public String processLogin(LoginForm loginForm) {
+    public String processLogin(AuthenticationRequest loginForm) {
         return "Login";
     }
 }

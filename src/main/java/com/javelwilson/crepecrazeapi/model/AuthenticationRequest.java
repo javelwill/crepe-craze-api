@@ -3,7 +3,7 @@ package com.javelwilson.crepecrazeapi.model;
 import lombok.Data;
 
 @Data
-public class LoginForm {
+public class AuthenticationRequest {
 
     private String username;
     private String password;
