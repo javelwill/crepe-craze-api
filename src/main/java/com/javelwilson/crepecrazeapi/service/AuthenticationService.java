@@ -1,6 +1,7 @@
 package com.javelwilson.crepecrazeapi.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.javelwilson.crepecrazeapi.config.JwtProp;
 import com.javelwilson.crepecrazeapi.model.AuthenticationRequest;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -21,9 +22,11 @@ import java.util.Date;
 public class AuthenticationService extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager authenticationManager;
+    private final JwtProp jwtProp;
 
-    public AuthenticationService(AuthenticationManager authenticationManager) {
+    public AuthenticationService(AuthenticationManager authenticationManager, JwtProp jwtProp) {
         this.authenticationManager = authenticationManager;
+        this.jwtProp = jwtProp;
     }
 
     @Override
@@ -42,15 +45,14 @@ public class AuthenticationService extends UsernamePasswordAuthenticationFilter 
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
-        String key = "securesecuresecuresecuresecuresecuresecuresecuresecuresecuresecure";
         String token = Jwts.builder()
                 .setSubject(authResult.getName())
                 .claim("authorities", authResult.getAuthorities())
                 .setIssuedAt(new Date())
                 .setExpiration(java.sql.Date.valueOf(LocalDate.now().plusWeeks(2)))
-                .signWith(Keys.hmacShaKeyFor(key.getBytes()))
+                .signWith(jwtProp.getSecretKeyForSigning())
                 .compact();
 
-        response.addHeader("Authorization", "Bearer " + token);
+        response.addHeader("Authorization", jwtProp.getTokenPrefix() + token);
     }
 }

@@ -1,6 +1,7 @@
 package com.javelwilson.crepecrazeapi.config;
 
 import com.javelwilson.crepecrazeapi.service.AuthenticationService;
+import com.javelwilson.crepecrazeapi.service.AuthorizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +21,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsService userDetailsService;
 
+    @Autowired
+    private JwtProp jwtProp;
+
     @Bean
     public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder(10);
@@ -35,7 +39,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .addFilter(new AuthenticationService(authenticationManager()))
+                .addFilter(new AuthenticationService(authenticationManager(), jwtProp))
+                .addFilterAfter(new AuthorizationService(), AuthenticationService.class)
                 .authorizeRequests()
                 .antMatchers("/", "/register", "index", "/css/*", "/js/*", "/h2-console/**").permitAll()
                 .antMatchers("/ingredients", "/design", "/design/**").hasRole("USER")
