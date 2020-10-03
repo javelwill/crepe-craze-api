@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .addFilter(new AuthenticationService(authenticationManager(), jwtProp))
-                .addFilterAfter(new AuthorizationService(), AuthenticationService.class)
+                .addFilterAfter(new AuthorizationService(jwtProp), AuthenticationService.class)
                 .authorizeRequests()
                 .antMatchers("/", "/register", "index", "/css/*", "/js/*", "/h2-console/**").permitAll()
                 .antMatchers("/ingredients", "/design", "/design/**").hasRole("USER")

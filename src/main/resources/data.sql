@@ -6,6 +6,9 @@ delete from Crepe;
 delete from Crepe_Order;
 delete from Ingredient;
 
+insert into User (id, username, password, first_name, last_name, street, city, state, zip, phone_number)
+                values (1, 'jav', '$2a$10$2siANc93NC.9b9BBCIeRLuz89pCzIXz47hTeMAzBWkZ26/B8lyGFO', 'Javel', 'Wilson', '1st Street',	'Kingston',	'JA', '876', '8769059741');
+
 insert into Ingredient (id, name, type, category)
                 values ('STRA', 'Stawberries', 'SELECTION', 'SWEET');
 insert into Ingredient (id, name, type, category)

@@ -26,8 +26,11 @@ import java.util.stream.Collectors;
 
 public class AuthorizationService extends OncePerRequestFilter {
 
-    @Autowired
     private JwtProp jwtProp;
+
+    public AuthorizationService(JwtProp jwtProp) {
+        this.jwtProp = jwtProp;
+    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
